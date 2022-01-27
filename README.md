@@ -14,9 +14,8 @@
 - 이클립스에서 Team 메뉴에서 깃허브연동 시키기(아래1-2-3단계)
 ![ex_screenshot](./README/git03.jpg)
 ![ex_screenshot](./README/git04.jpg)
-- 로컬PC에 커밋(아래)
+- 로컬PC에 커밋:아이디는 깃아이디, 암호는 토큰값으로 로그인 후 아래 푸시처리 진행 됩니다.(아래)
 ![ex_screenshot](./README/git05.jpg)
-- 위 아이디는 깃아이디, 암호는 토큰값으로 로그인 후 아래 푸시처리 진행 됩니다.
-- 원격 깃허브에 푸시(아래)
+- 원격 깃허브에 푸시: 깃허브 주소를 커밋설정에 붙여넣습니다.(아래)
+ https://github.com/kimilguk/kimilguk-boot2
 ![ex_screenshot](./README/git06.jpg)
-- 깃허브 주소를 커밋설정에 붙여넣습니다(위). https://github.com/kimilguk/kimilguk-boot2
