@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.3'//지정한 스프리부트버전
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'//지정한 개발언어
+}
+
+group = 'com.herokuapp'
+version = '0.0.1-SNAPSHOT'//kimilguk-boot2-0.0.1-SNAPSHOT.jar실행파일명 지정됨
+sourceCompatibility = '11'//지정한 자바버전
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()//외부 의존성모듈을 다운받을 위치지정
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.session:spring-session-jdbc'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()//Java단위테스트인 Junit을 실행가능하게 지정(기본값)
+}
