@@ -3,8 +3,8 @@
 - [교수의 모든 주차_교시별 강의용소스 링크](https://github.com/kimilguk/kimilguk-boot2/branches/all)
 
 #### 아래항목은 필요한 학생만 선택해서 하세요
-- 보안때문에 Token값 생성 및 사용필수(아래)
-- 깃허브 Settings > Developer settings 메뉴 Generate token버튼 필요
+- 보안때문에 Token값 생성 및 사용필수(아래1-2단계)
+- 깃허브 Settings > Developer settings 메뉴 Generate token버튼 으로 생성한 토큰 값을 복사해 놓는다.(보안때문에 깃 푸시할때 매번 입력하는것을 추천한다)
 ![ex_screenshot](./README/git07.jpg)
 
 - 깃허브 저장소 만들기(아래1-2-3단계)
