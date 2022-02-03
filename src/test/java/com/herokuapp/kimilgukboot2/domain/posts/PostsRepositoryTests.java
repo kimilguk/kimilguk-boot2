@@ -41,6 +41,10 @@ class PostsRepositoryTests {
 		Posts posts = postsList.get(0);
 		logger.debug("등록된 레코드수:"+postsRepository.count());
 		logger.info("디버그:"+posts.toString());
+		//위 debug 메소드는 출력이 되지 않는다. 로깅 레벨을 기본값이 info 이다.
+		//로깅레벨을 수정하려면, application.properties 파일에서 아래 내용 추가한다.
+		//로깅레벨(많은내용 출력순서): debug>info>warn>error
+		//logging.level.root=debug
 	}
 
 }
