@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest//스프링부트에 Junit5=주피터가 포함되어서 구현된다.
 class HelloDtoTests {
 
-	@Autowired//스프링빈(실행가능한 클래스)로 등록
+	@Autowired//의존성주입(외부클래스를 스프링빈으로 등록 후 객체로생성)
 	private MockMvc mockMvc;
 	@Autowired
     private WebApplicationContext ctx;//웹 소스 대상 전체
