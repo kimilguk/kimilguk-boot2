@@ -51,12 +51,14 @@ class PostsApiControllerTests {
 		System.out.println("디버그" + postList.toString());
 		System.out.println("디버그" + postList.get(0).getCreateDate());//등록일시가 null 이 나오는 이유는 Application.java에서 Auditing을 활성화 시키면 해결된다.@EnableJpaAuditing//JPA공통DB필드(변수)사용
 	}
-	
+	//IndexController 의 postList()메소드 실행테스트(아래)
 	@Test
 	public void postList() throws Exception {
 		mockMvc.perform(
-				post("/posts")
-				);
+				get("/posts")
+				)
+		.andExpect(status().isOk())
+		.andDo(print());//반환성공 후 body 내용을 출력한다.
 	}
 
 }
