@@ -39,7 +39,7 @@ class PostsRepositoryTests {
 		//DB posts 테이블에 저장된 값 출력(아래)
 		List<Posts> postsList = postsRepository.findAll();
 		Posts posts = postsList.get(0);
-		logger.info("등록된 레코드수:"+postsRepository.count());
+		logger.debug("등록된 레코드수:"+postsRepository.count());
 		logger.info("디버그:"+posts.toString());
 	}
 
