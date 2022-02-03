@@ -22,7 +22,7 @@ public class IndexController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	private final PostsService postsService;//생성자로 주입
 	
-	@GetMapping("/api/posts")//전체게시물 Read
+	@GetMapping("/posts")//전체게시물 Read
 	public String postList(@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model) {
 		Page<Posts> postsList = postsService.postsList(pageable);
 		model.addAttribute("postsList", postsList);//게시글목록 5개
