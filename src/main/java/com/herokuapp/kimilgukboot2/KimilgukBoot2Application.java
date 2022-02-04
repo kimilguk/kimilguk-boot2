@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
+//스프링에서 @애노테이션은 인터페이스 기반으로 클래스에 특별한 의미를 부여하거나, 기능을 주입한다.
 @EnableJpaAuditing//JPA공통DB필드(변수)사용
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class KimilgukBoot2Application {
