@@ -22,6 +22,10 @@ public class IndexController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	private final PostsService postsService;//생성자로 주입
 	
+	@GetMapping("/posts/save")//Url주소와 posts-save.mustache를 매핑시킨다.
+	public String postsSave() {
+		return "posts/posts-save";
+	}
 	//@GetMapping("/posts")//전체게시물 Read
 	@GetMapping("/")//접근 Api Url을 도메인 루트로 변경한다.
 	public String postList(@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model) {
