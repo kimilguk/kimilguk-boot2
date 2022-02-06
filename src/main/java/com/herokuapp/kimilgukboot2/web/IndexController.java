@@ -27,6 +27,7 @@ public class IndexController {
 	public String postList(@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model) {
 		Page<Posts> postsList = postsService.postsList(pageable);
 		model.addAttribute("postsList", postsList);//게시글목록 5개
+		model.addAttribute("currPage", postsList.getPageable().getPageNumber());//현재페이지번호
 		model.addAttribute("pageIndex", postsList.getTotalPages());//전체페이지개수
 		model.addAttribute("prevCheck", postsList.hasPrevious());//이전페이지 있는지 체크
 		model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());//이전페이지번호 사용
