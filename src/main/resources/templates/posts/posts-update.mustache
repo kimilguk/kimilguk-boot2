@@ -24,6 +24,9 @@
                 {{#post.fileId}}
                 <a href="#">단일 첨부파일은 이후 수업에서 작업예정</a>
                 {{/post.fileId}}
+                {{^post.fileId}}
+	                <input type="hidden" name="file_id" id="file_id" value="">
+	            {{/post.fileId}}
             </div>
             <div class="form-group">
                 <label for="inputFile">단일 첨부 파일</label>
