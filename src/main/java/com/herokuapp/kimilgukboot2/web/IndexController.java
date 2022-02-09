@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.herokuapp.kimilgukboot2.domain.posts.Posts;
+import com.herokuapp.kimilgukboot2.service.posts.FileService;
 import com.herokuapp.kimilgukboot2.service.posts.PostsService;
+import com.herokuapp.kimilgukboot2.web.dto.FileDto;
 import com.herokuapp.kimilgukboot2.web.dto.PostsDto;
 
 import lombok.RequiredArgsConstructor;
@@ -23,13 +25,16 @@ public class IndexController {
 	//로그 출력 객체생성
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	private final PostsService postsService;//생성자로 주입
+	private final FileService fileService;//생성자로 주입
 	
 	@GetMapping("posts/update/{id}")
 	public String postsUpdate(@PathVariable Long id, Model model) {
 		PostsDto dto = postsService.postsOne(id);//1개의 레코드만 가져온다.
 		model.addAttribute("post",dto);//모델객체에 담아서 mustache로 보낸다.
 		if(dto.getFileId() != null) {
-			//단일 첨부파일 처리는 이후 수업에서 작업예정 
+			//단일 첨부파일 처리는 이후 수업에서 작업(아래)
+			FileDto fileDto = fileService.getFile(dto.getFileId());
+			model.addAttribute("OrigFilename", fileDto.getOrigFilename());
 		}
 		return "posts/posts-update";
 	}
@@ -38,7 +43,9 @@ public class IndexController {
 		PostsDto dto = postsService.postsOne(id);//1개의 레코드만 가져온다.
 		model.addAttribute("post",dto);//모델객체에 담아서 mustache로 보낸다.
 		if(dto.getFileId() != null) {
-			//단일 첨부파일 처리는 이후 수업에서 작업예정 
+			//단일 첨부파일 처리는 이후 수업에서 작업(아래)
+			FileDto fileDto = fileService.getFile(dto.getFileId());
+			model.addAttribute("OrigFilename", fileDto.getOrigFilename());
 		}
 		return "posts/posts-read";
 	}
