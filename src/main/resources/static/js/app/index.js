@@ -8,7 +8,9 @@ var main = {
         })
         $('#btn-delete-file').on('click', function(){
             _this.deleteFile();
-            location.reload(true);
+            //location.reload(true);
+            //Posts테이블의 file_id 값도 수정해야 하기 때문에 아래 추가
+            _this.update();
         })
         $('#btn-save').on('click', function(){
             _this.save();
