@@ -28,7 +28,7 @@ public class FileService {
 		File file = fileRepository.findById(id).get();//DB의 파일 테이블에서 가져온 객체를 get()메소드로 반환한다.
 		return FileDto.builder()
 				.id(id)
-				.origFilename(file.getFilename())
+				.origFilename(file.getOrigFilename())
 				.filename(file.getFilename())
 				.filePath(file.getFilePath())
 				.build();

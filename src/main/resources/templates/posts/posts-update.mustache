@@ -22,7 +22,9 @@
             <div class="form-group">
                 <label for="author"> 첨부파일</label>
                 {{#post.fileId}}
-                <a href="#">단일 첨부파일은 이후 수업에서 작업예정</a>
+                	<a href="/api/file_download/{{post.fileId}}">{{OrigFilename}}</a>
+                	<button type="button" class="btn btn-danger" id="btn-delete-file">파일삭제</button>
+                	<input type="hidden" name="file_id" id="file_id" value="{{post.fileId}}">
                 {{/post.fileId}}
                 {{^post.fileId}}
 	                <input type="hidden" name="file_id" id="file_id" value="">
