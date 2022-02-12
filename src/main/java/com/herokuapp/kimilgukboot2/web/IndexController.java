@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.herokuapp.kimilgukboot2.config.auth.LoginUser;
+import com.herokuapp.kimilgukboot2.config.auth.dto.SessionUser;
 import com.herokuapp.kimilgukboot2.domain.posts.Posts;
 import com.herokuapp.kimilgukboot2.service.posts.FileService;
 import com.herokuapp.kimilgukboot2.service.posts.PostsService;
@@ -28,7 +30,11 @@ public class IndexController {
 	private final FileService fileService;//생성자로 주입
 	
 	@GetMapping("posts/update/{id}")
-	public String postsUpdate(@PathVariable Long id, Model model) {
+	public String postsUpdate(@PathVariable Long id, Model model,@LoginUser SessionUser user) {
+		if(user != null) {
+			model.addAttribute("sessionUserName", user.getName());
+			model.addAttribute("sessionRoleName", "ROLE_ADMIN".equals(user.getRole())?"admin":null);
+		}
 		PostsDto dto = postsService.postsOne(id);//1개의 레코드만 가져온다.
 		model.addAttribute("post",dto);//모델객체에 담아서 mustache로 보낸다.
 		if(dto.getFileId() != null) {
@@ -39,7 +45,11 @@ public class IndexController {
 		return "posts/posts-update";
 	}
 	@GetMapping("/posts/read/{id}")//패스경로에 id값이 들어갔다. @PathVariable 사용해서 자바코드에서 사용
-	public String postsRead(@PathVariable Long id, Model model) {
+	public String postsRead(@PathVariable Long id, Model model,@LoginUser SessionUser user) {
+		if(user != null) {
+			model.addAttribute("sessionUserName", user.getName());
+			model.addAttribute("sessionRoleName", "ROLE_ADMIN".equals(user.getRole())?"admin":null);
+		}
 		PostsDto dto = postsService.postsOne(id);//1개의 레코드만 가져온다.
 		model.addAttribute("post",dto);//모델객체에 담아서 mustache로 보낸다.
 		if(dto.getFileId() != null) {
@@ -55,7 +65,11 @@ public class IndexController {
 	}
 	//@GetMapping("/posts")//전체게시물 Read
 	@GetMapping("/")//접근 Api Url을 도메인 루트로 변경한다.
-	public String postList(@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model) {
+	public String postList(@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model,@LoginUser SessionUser user) {
+		if(user != null) {
+			model.addAttribute("sessionUserName", user.getName());
+			model.addAttribute("sessionRoleName", "ROLE_ADMIN".equals(user.getRole())?"admin":null);
+		}
 		Page<Posts> postsList = postsService.postsList(pageable);
 		model.addAttribute("postsList", postsList);//게시글목록 5개
 		model.addAttribute("currPage", postsList.getPageable().getPageNumber());//현재페이지번호
