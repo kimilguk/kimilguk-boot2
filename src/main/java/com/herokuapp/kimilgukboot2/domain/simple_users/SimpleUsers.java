@@ -38,17 +38,17 @@ public class SimpleUsers extends BaseTimeEntity {
 	@Column(nullable=false)
 	private String role;//회원권한
 	@Column(nullable=false)
-	private String enabled;//회원사용여부(false시 인증되더라도 로그인 불가)
+	private Boolean enabled;//회원사용여부(false시 인증되더라도 로그인 불가)
 	
 	@Builder//입력 기능으로 다른 클래스에서 build() 메소드 형식으로 사용가능
-	public SimpleUsers(String username, String password, String role, String enabled) {
+	public SimpleUsers(String username, String password, String role, Boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.role = role;
 		this.enabled = enabled;
 	}
 	//회원 수정시 쿼리로 DB를 핸들링 하지 않아도 아래 메소드로 바로 업데이트 된다.
-	public void update(String username, String password, String role, String enabled) {
+	public void update(String username, String password, String role, Boolean enabled) {
 		this.username = username;
 		//스프링 시큐리티를 사용하기 때문에 DB에 저장할 때는 비번을 필수로암호화 해야 한다.
 		String encPassword = null;
