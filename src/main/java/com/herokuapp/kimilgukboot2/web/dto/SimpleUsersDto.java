@@ -34,7 +34,6 @@ public class SimpleUsersDto {
 		if(!password.isEmpty()) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			encPassword = passwordEncoder.encode(password);
-			this.password = password;
 		}		
 		return SimpleUsers.builder()
 				.username(username)

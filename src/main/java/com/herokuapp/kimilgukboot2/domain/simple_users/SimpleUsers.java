@@ -40,7 +40,7 @@ public class SimpleUsers extends BaseTimeEntity {
 	@Column(nullable=false)
 	private Boolean enabled;//회원사용여부(false시 인증되더라도 로그인 불가)
 	
-	@Builder//입력 기능으로 다른 클래스에서 build() 메소드 형식으로 사용가능
+	@Builder//Dto클래스에서 사용, 입력 기능으로 다른 클래스에서 build() 메소드 형식으로 사용가능
 	public SimpleUsers(String username, String password, String role, Boolean enabled) {
 		this.username = username;
 		this.password = password;
