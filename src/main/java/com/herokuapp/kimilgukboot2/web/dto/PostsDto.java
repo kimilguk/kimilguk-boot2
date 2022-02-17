@@ -20,7 +20,7 @@ public class PostsDto {
     private Long fileId;//첨부파일 번호
     private LocalDateTime createDate;
     private LocalDateTime modifieDate;
-    //DB엔티티 값을 Dto객체에 담아서 조회(자동생성코드사용)
+    //@서비스에서 저장 시 사용, DB엔티티 값을 Dto객체에 담아서 조회(자동생성코드사용)
 	public PostsDto(Posts entity) {//엔티티 클래스를 사용해서 DB레코드를 가져온다  
 		//super();상속 클래스가 없기 때문에 주석처리
 		this.id = entity.getId();
@@ -31,7 +31,7 @@ public class PostsDto {
 		this.createDate = entity.getCreateDate();
 		this.modifieDate = entity.getModifieDate();
 	}
-	//빌더형식으로 임시저장(자동생성코드사용)
+	//@컨트롤러에서 사용 빌더형식으로 임시저장(자동생성코드사용)
 	@Builder
 	public PostsDto(long id, String title, String content, String author, Long fileId) {
 		//super();상속 클래스가 없기 때문에 주석처리
