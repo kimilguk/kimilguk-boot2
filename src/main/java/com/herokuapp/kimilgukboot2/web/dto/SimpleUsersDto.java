@@ -20,6 +20,16 @@ public class SimpleUsersDto {
 	private String role;//회원 권한(ADMIN, USER)
 	private Boolean enabled;//회원인데 로그인가능 여부
 	private LocalDateTime modifiedDate;//정보 수정일시(머스테치 화면출력에 필요)
+	
+	//@컨트롤러 조회에서 사용
+	public SimpleUsersDto(SimpleUsers entity) {
+		this.id = entity.getId();
+		this.username = entity.getUsername();
+		this.password = entity.getPassword();
+		this.role = entity.getRole();
+		this.enabled = entity.getEnabled();
+		this.modifiedDate = entity.getModifieDate();
+	}
 	@Builder//@컨트롤러에서 저장,수정 값등록에 사용(아래)
 	public SimpleUsersDto(String username, String password, String role, Boolean enabled) {
 		this.username = username;
