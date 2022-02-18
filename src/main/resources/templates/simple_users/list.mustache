@@ -14,18 +14,10 @@ $(document).ready(function() {
         <!-- 로그인 기능 영역 -->
         <div class="row">
             <div class="col-md-6">
-                <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+	            <a href="/simple_users/save" role="button" class="btn btn-primary">회원 등록</a>
                 {{#sessionUserName}}
                 Looged in as : <span id="user">{{sessionUserName}}</span>
                 <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-                {{#sessionRoleName}}
-                <a href="/simple_users/list" class="btn btn-secondary active" role="button">
-                    회원관리
-                </a>
-                {{/sessionRoleName}}
-                <a href="#" class="btn btn-secondary active" role="button">
-                    마이페이지
-                </a>
                 {{/sessionUserName}}
                 {{^sessionUserName}}
                 <a href="#" class="btn btn-success active" role="button">
@@ -33,9 +25,6 @@ $(document).ready(function() {
                 </a>
                 <a href="/login" class="btn btn-warning active" role="button">
                     회원로그인
-                </a>
-                <a href=#" class="btn btn-secondary active" role="button">
-                    회원가입
                 </a>
                 {{/sessionUserName}}
             </div>
@@ -52,28 +41,22 @@ $(document).ready(function() {
     <table class="table table-horizontal table-bordered">
         <thead class="thead-string">
         <tr>
-            <th>게시글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
+            <th>회원아이디</th>
+            <th>회원권한</th>
+            <th>로그인가능</th>
             <th>최종수정일</th>
         </tr>
         </thead>
         <tbody id="tbody">
-        {{#postsList}}<!-- 자바의 for반목구문과 동일:postsList 객체값에는 #을 붙인다. -->
+        {{#usersList}}<!-- 자바의 for반목구문과 동일:postsList 객체값에는 #을 붙인다. -->
         <!-- postsList 객체값이 있으면 계속 아래 내용을 출력한다. -->
         <tr>
-            <td>{{id}}</td>
-            <td><a href="/posts/read/{{id}}">{{title}}</a></td>
-            <td>{{author}}</td>
+            <td><a href="/simple_users/update/{{username}}">{{username}}</a></td>
+            <td>{{role}}</td>
+            <td>{{enabled}}</td>
             <td>{{modifieDate}}</td>
         </tr>
-        {{/postsList}}<!-- 객체를 열면 닫는 코드가 존재해야 한다. -->
-        <!-- <tr>
-            <td>1</td>
-            <td><a href="posts-read.html">게시물 제목 테스트</a></td>
-            <td>admin</td>
-            <td>2021.08.15</td>
-        </tr>  -->       
+        {{/usersList}}<!-- 객체를 열면 닫는 코드가 존재해야 한다. -->
         </tbody>
     </table>
     <ul class="pagination justify-content-center">
