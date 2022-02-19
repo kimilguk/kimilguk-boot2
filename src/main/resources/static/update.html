@@ -55,11 +55,11 @@ $(document).ready(function() {
                 <input type="radio" name="enabled" value="true">허용
                 <input type="radio" name="enabled" value="false">금지
             </div>
-        </form>
         <a href="/simple_users/list" role="button" class="btn btn-secondary">취소</a>
         <button type="submit" class="btn btn-primary" id="btn-member-save">수정</button>
         <button type="button" class="btn btn-primary" id="btn-member-delete">삭제</button>
         <input type="hidden" name="id" value="머스테치 값">
+        </form><!-- submit 기능 때문에 닫는 폼 위치가 변경된 것에 주의 한다. -->
     </div>
 </div>
 <script>
