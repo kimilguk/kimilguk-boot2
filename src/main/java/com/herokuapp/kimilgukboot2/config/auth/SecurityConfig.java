@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired//스프링부트의 DI(Dependency Injection 의존성주입)기능 사용
-	private DataSource dataSource;//객체 생성
+	private DataSource dataSource;//jdbc를 사용하는데 필요한 객체 생성
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
