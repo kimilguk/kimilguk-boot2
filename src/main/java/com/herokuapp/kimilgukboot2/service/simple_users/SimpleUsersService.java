@@ -30,6 +30,10 @@ public class SimpleUsersService {
 	public Page<SimpleUsers> usersList(Pageable pageable) {
 		return simpleUsersRepository.findAll(pageable);
 	}
+	@Transactional//읽기:전체회원 Read+검색 keyword 추가
+	public Page<SimpleUsers> usersList(String keyword,Pageable pageable) {
+		return simpleUsersRepository.findByUsernameContaining(keyword, pageable);
+	}
 	@Transactional//수정:Update는 엔티티의 값만수정하면 레포지토리 없이 DB값도 연동된다
 	public Long update(Long id, SimpleUsersDto requestDto) {
 		SimpleUsers simpleUsers = simpleUsersRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다."));
