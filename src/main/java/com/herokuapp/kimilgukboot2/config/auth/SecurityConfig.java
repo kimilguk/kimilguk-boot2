@@ -56,7 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.invalidateHttpSession(true)//로그아웃시 생성된 모든 세션 지우기
 		.and()
 		.formLogin()//스프링 시큐리티에 내장된 로그인 폼 사용 내장된 Url: /login
-		.defaultSuccessUrl("/");//로그인 성공시 기본 이동 경로지정		
+		.defaultSuccessUrl("/")//로그인 성공시 기본 이동 경로지정	
+		.and()
+		.oauth2Login()//OAuth2.0설정 시작명시
+		.userInfoEndpoint()//네아로 로그인 성공 후 사용자 정보 가져오기 설정 자동생성
+		.userService(customOAuth2UserService);//로그인 성공시 세션을 저장코딩을 추가할 OAuth2UserServic 시스템 클래스를 상속한 @서비스 만들예정 
 	}
 	
 }
