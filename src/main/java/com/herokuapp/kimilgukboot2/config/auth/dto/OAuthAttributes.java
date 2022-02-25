@@ -66,7 +66,7 @@ public class OAuthAttributes {
 				.name(name)
 				.email(email)
 				.picture(picture)
-				.role(Role.USER)
+				.role(Role.USER)//네이버 API 로그인한 회원은 무조건 ROLE_USER권한으로 등록한다.
 				.build();
 	}
 }
