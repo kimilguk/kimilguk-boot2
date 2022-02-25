@@ -28,7 +28,8 @@ $(document).ready(function() {
                 </a>
                 {{/sessionUserName}}
                 {{^sessionUserName}}
-                <a href="#" class="btn btn-success active" role="button">
+                <!-- 스프링 시큐리티에서 기본적으로 제공하는 로그인 URL이다. 매칭되는 컨트롤러 코드를 생성할 필요가 없다. -->
+                <a href="/oauth2/authorization/naver" class="btn btn-success active" role="button">
                     Naver Login
                 </a>
                 <a href="/login" class="btn btn-warning active" role="button">

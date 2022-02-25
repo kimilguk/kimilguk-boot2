@@ -42,7 +42,7 @@ public class OAuthAttributes {
 		this.picture = picture;
 	}
 	//여러 외부 로그인 인증을 위한 분기용 of()메소드 생성
-	public OAuthAttributes of(String registrationId,String userNameAttributeName,Map<String, Object> attributes) {
+	public static OAuthAttributes of(String registrationId,String userNameAttributeName,Map<String, Object> attributes) {
 		if("naver".equals(registrationId)) {
 			//아래 줄은 스프링부트OAuth2에서 생성된다.(구글실제 id값은 "sub")
 			userNameAttributeName = "id";//네이버API는 수동으로 입력.
@@ -50,7 +50,7 @@ public class OAuthAttributes {
 		}
 		return null;
 	}
-	private OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
+	private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
 		Map<String, Object> response = (Map<String, Object>) attributes.get("response");
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))

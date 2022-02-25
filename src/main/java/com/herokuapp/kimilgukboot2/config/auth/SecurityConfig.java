@@ -12,11 +12,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor//final 매개변수가 있는 생성자메소드가 자동 생성된다
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired//스프링부트의 DI(Dependency Injection 의존성주입)기능 사용
 	private DataSource dataSource;//jdbc를 사용하는데 필요한 객체 생성
+	private final CustomOAuth2UserService customOAuth2UserService;//객체 생성
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication()
