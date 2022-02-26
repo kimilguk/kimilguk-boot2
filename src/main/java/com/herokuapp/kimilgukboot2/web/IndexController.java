@@ -29,7 +29,13 @@ public class IndexController {
 	private final PostsService postsService;//생성자로 주입
 	private final FileService fileService;//생성자로 주입
 	
-	@GetMapping("posts/update/{id}")
+	@GetMapping("/kakaomap")
+	public String kakaoMap(Model model) {
+		//공공데이터포털에서 한국전력공사_전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
+		model.addAttribute("response", null);
+		return "kakaomap";//resource루트의 templates폴더에 kakaomap.mustache 파일과 연결
+	}
+	@GetMapping("/posts/update/{id}")
 	public String postsUpdate(@PathVariable Long id, Model model,@LoginUser SessionUser user) {
 		if(user != null) {
 			model.addAttribute("sessionUserName", user.getName());
