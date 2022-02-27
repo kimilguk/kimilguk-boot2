@@ -66,6 +66,7 @@ public class IndexController {
         }
         rd.close();
         conn.disconnect();
+        //logger.info("xml결과: \n" + sb.toString());//xml 데이터를 출력한다.
         JSONObject jsonObject = XML.toJSONObject(sb.toString());
         //System.out.println(jsonObject.toString());//xml to json 전체 데이터
         JSONObject rfcOpenApi = (JSONObject) (jsonObject.get("rfcOpenApi"));
