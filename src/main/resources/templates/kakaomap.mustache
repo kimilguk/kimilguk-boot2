@@ -1,26 +1,47 @@
 {{>layout/header}}
 <h2>전기차 충전소 위치</h2>
+<br>
+<form action="/kakaomap" method="GET">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+        <button class="btn btn-secondary">검색</button>
+    </div>
+</form>
 <!-- 이미지 지도를 표시할 div 입니다 -->
 <div id="map" style="width:100%;height:350px;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68d1f306dc07fef29fbdf6c8afac2186"></script>
 <script>
-var positions = [];
-var response = "{{response}}".replace(/&quot;/g, '"');
-var jsonData = JSON.parse(response);
-console.log(jsonData["data"]["list"]);
-jsonData["data"]["list"].forEach(function(element){
+var positions = [];//자바스크립트 배열 선언
+var response = "{{response}}".replace(/&quot;/g, '"');//응답json데이터에서 특수문자 &quot;를 "로 교체
+var jsonData = JSON.parse(response);//json방식문자열을 JSON 자바스크립트 객체로 변경
+console.log(jsonData["data"]["list"]);//계층형 데이터 확인
+var centerLa = 0;//초기 중심위도
+var centerLo = 0;//초기 중심경도
+if(Array.isArray(jsonData["data"]["list"])) {//반환값이 1개 이상 배열일 때
+	jsonData["data"]["list"].forEach(function(element){//계층형 데이터를 반복하면서, 배열에 값 push 입력
+		positions.push(
+			{
+		        content: "<div>"+element["chrstn_nm"]+"</div>",
+		        latlng: new kakao.maps.LatLng(element["la"], element["lo"])
+		    }
+		);
+	});
+	var index = parseInt(positions.length/2);//입력된 배열 개수를 2로 나눈 값=지도좌표의 초기 중심위치 지정
+	centerLa = jsonData["data"]["list"][index]["la"];
+	centerLo = jsonData["data"]["list"][index]["lo"];
+}else{//반환값이 1개일 때
+	centerLa = jsonData["data"]["list"]["la"];
+	centerLo = jsonData["data"]["list"]["lo"];
 	positions.push(
 		{
-	        content: "<div>"+element["chrstn_nm"]+"</div>",
-	        latlng: new kakao.maps.LatLng(element["la"], element["lo"])
+	        content: "<div>"+jsonData["data"]["list"]["chrstn_nm"]+"</div>",
+	        latlng: new kakao.maps.LatLng(centerLa, centerLo)
 	    }
 	);
-});
-var count = parseInt(positions.length/2);
-console.log(positions);
+}
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 mapOption = { 
-    center: new kakao.maps.LatLng(jsonData["data"]["list"][count]["la"], jsonData["data"]["list"][count]["lo"]), // 지도의 중심좌표
+    center: new kakao.maps.LatLng(centerLa, centerLo), // 지도의 중심좌표
     level: 10 // 지도의 확대 레벨
 };
 //마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 여기에 전기차 충전소 위치 값을 가져올 예정

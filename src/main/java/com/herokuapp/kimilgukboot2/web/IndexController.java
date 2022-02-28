@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -41,13 +42,13 @@ public class IndexController {
 	private final FileService fileService;//생성자로 주입
 	
 	@GetMapping("/kakaomap")
-	public String kakaoMap(Model model) throws IOException {
-		//공공데이터포털에서 한국전력공사_전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
+	public String kakaoMap(@RequestParam(value="keyword", defaultValue="")String keyword,Model model) throws IOException {
+		//공공데이터포털에서 전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
 		StringBuilder urlBuilder = new StringBuilder("http://data.uiryeong.go.kr/rest/uiryeongelctyvhclechrstn/getUiryeongelctyvhclechrstnList"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=PLJPmKeBFGOkoxgAoLJgT962Uh0QPWijxPNQ%2Bl%2B4o24r9R%2BqbclT0Fc9xSamDrGiMYAF4CrpJLaDOsKZ%2FDoN%2Bw%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*페이지 크기(기본10)*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*시작 페이지(기본1)*/
-        urlBuilder.append("&" + URLEncoder.encode("chrstn_nm","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*충전소명*/
+        urlBuilder.append("&" + URLEncoder.encode("chrstn_nm","UTF-8") + "=" + URLEncoder.encode(keyword, "UTF-8")); /*충전소명*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
