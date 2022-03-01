@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
 import org.json.XML;
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,8 +31,11 @@ import com.herokuapp.kimilgukboot2.config.auth.dto.SessionUser;
 import com.herokuapp.kimilgukboot2.domain.posts.Posts;
 import com.herokuapp.kimilgukboot2.service.posts.FileService;
 import com.herokuapp.kimilgukboot2.service.posts.PostsService;
+import com.herokuapp.kimilgukboot2.service.simple_users.SimpleUsersService;
+import com.herokuapp.kimilgukboot2.util.ScriptUtils;
 import com.herokuapp.kimilgukboot2.web.dto.FileDto;
 import com.herokuapp.kimilgukboot2.web.dto.PostsDto;
+import com.herokuapp.kimilgukboot2.web.dto.SimpleUsersDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,7 +46,28 @@ public class IndexController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	private final PostsService postsService;//생성자로 주입
 	private final FileService fileService;//생성자로 주입
+	private final SimpleUsersService simpleUsersService;
 	
+	@GetMapping("/signup")//일반회원생성 디자인보기
+	public String signupGet() {
+		return "signup";//signup.mustache 생략
+	}
+	@PostMapping("/signup")//회원생성 API실행
+	public String signupPost(HttpServletResponse response,SimpleUsersDto requestDto) throws IOException {
+		SimpleUsersDto usersDto = null;//중복회원 체크용
+		try {
+		usersDto = simpleUsersService.findByName(requestDto.getUsername());
+		}catch(Exception e){
+		}
+		if(usersDto == null) {
+			requestDto.setRole("USER");//해킹 위험 때문에 강제로 일반사용자로 고정함.
+			simpleUsersService.save(requestDto);
+			ScriptUtils.alertAndMovePage(response, "회원가입 되었습니다. 로그인 후 이용해 주세요.", "/");
+		}else {
+			ScriptUtils.alertAndBackPage(response, "중복 아이디가 존재합니다. 아이디를 다시 입력해 주세요.");
+		}		
+		return null;//"redirect:/simple_users/list";//저장 후 절대경로로 페이지이동
+	}
 	@GetMapping("/kakaomap")
 	public String kakaoMap(@RequestParam(value="keyword", defaultValue="")String keyword,Model model) throws IOException {
 		//공공데이터포털에서 전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
