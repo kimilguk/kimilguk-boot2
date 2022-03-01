@@ -55,7 +55,7 @@ public class SimpleUsers extends BaseTimeEntity {
 		if(!password.isEmpty()) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			encPassword = passwordEncoder.encode(password);
-			this.password = password;
+			this.password = encPassword;
 		}		
 		this.role = role;
 		this.enabled = enabled;
