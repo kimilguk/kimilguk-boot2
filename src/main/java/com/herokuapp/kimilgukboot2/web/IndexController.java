@@ -60,7 +60,7 @@ public class IndexController {
 		return null;
 	}
 	@PostMapping("/mypage/delete")//회원삭제 API실행
-	public String simpleUsersDelete(HttpServletResponse response,SimpleUsersDto requestDto) throws IOException {
+	public String mypageDelete(HttpServletResponse response,SimpleUsersDto requestDto) throws IOException {
 		simpleUsersService.delete(requestDto.getId());
 		ScriptUtils.alertAndMovePage(response, "회원탈퇴 되었습니다.", "/logout");
 		return null;//삭제 후 절대경로로 페이지 이동

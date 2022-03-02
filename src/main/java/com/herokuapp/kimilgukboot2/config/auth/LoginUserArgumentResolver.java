@@ -48,6 +48,7 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 			} else {
 				userAuthor = Role.GUEST;
 			}
+			logger.info("여기" + userAuthor.name() + ":" + userAuthor.getKey());
 			// 세션 값 저장 핵심(아래)
 			httpSession.setAttribute("user", new SessionUser(userName,userAuthor.getKey()));
 		}
