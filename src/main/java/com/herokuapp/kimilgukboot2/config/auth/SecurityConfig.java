@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.oauth2Login()//OAuth2.0설정 시작명시
 		.userInfoEndpoint()//네아로 로그인 성공 후 사용자 정보 가져오기 설정 자동생성
-		.userService(customOAuth2UserService);//로그인 성공시 세션을 저장코딩을 추가할 OAuth2UserServic 시스템 클래스를 상속한 @서비스 만들예정 
+		.userService(null);//customOAuth2UserService,로그인 성공시 세션을 저장코딩을 추가할 OAuth2UserServic 시스템 클래스를 상속한 @서비스 만들예정 
 	}
 	
 }
