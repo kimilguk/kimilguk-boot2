@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,8 +29,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.herokuapp.kimilgukboot2.config.auth.LoginUser;
 import com.herokuapp.kimilgukboot2.config.auth.dto.SessionUser;
+import com.herokuapp.kimilgukboot2.domain.posts.ManyFile;
 import com.herokuapp.kimilgukboot2.domain.posts.Posts;
 import com.herokuapp.kimilgukboot2.service.posts.FileService;
+import com.herokuapp.kimilgukboot2.service.posts.ManyFileService;
 import com.herokuapp.kimilgukboot2.service.posts.PostsService;
 import com.herokuapp.kimilgukboot2.service.simple_users.SimpleUsersService;
 import com.herokuapp.kimilgukboot2.util.ScriptUtils;
@@ -47,6 +50,7 @@ public class IndexController {
 	private final PostsService postsService;//생성자로 주입
 	private final FileService fileService;//생성자로 주입
 	private final SimpleUsersService simpleUsersService;
+	private final ManyFileService manyFileService;//생성자로 주입
 	
 	@GetMapping("/mypage/update/{username}")//회원상세 디자인보기
 	public String mypageUpdate(@PathVariable String username,Model model,@LoginUser SessionUser user) {
@@ -135,6 +139,11 @@ public class IndexController {
 			FileDto fileDto = fileService.getFile(dto.getFileId());
 			model.addAttribute("OrigFilename", fileDto.getOrigFilename());
 		}
+		//멀티파일 조회처리
+		List<ManyFile> manyFileList = manyFileService.getManyFile(id);
+		if(manyFileList.size()>0) {//객체의 레코드 개수를 구할 때 size() 메소드를 사용한다.
+			model.addAttribute("manyFileList", manyFileList);
+		}
 		return "posts/posts-update";
 	}
 	@GetMapping("/posts/read/{id}")//패스경로에 id값이 들어갔다. @PathVariable 사용해서 자바코드에서 사용
@@ -149,6 +158,11 @@ public class IndexController {
 			//단일 첨부파일 처리는 이후 수업에서 작업(아래)
 			FileDto fileDto = fileService.getFile(dto.getFileId());
 			model.addAttribute("OrigFilename", fileDto.getOrigFilename());
+		}
+		//멀티파일 조회처리
+		List<ManyFile> manyFileList = manyFileService.getManyFile(id);
+		if(manyFileList.size()>0) {
+			model.addAttribute("manyFileList", manyFileList);
 		}
 		return "posts/posts-read";
 	}
