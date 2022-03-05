@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.herokuapp.kimilgukboot2.config.auth.LoginUser;
+import com.herokuapp.kimilgukboot2.config.auth.dto.SessionUser;
 import com.herokuapp.kimilgukboot2.service.posts.PostsService;
 import com.herokuapp.kimilgukboot2.web.dto.PostsDto;
 
@@ -23,7 +25,8 @@ public class PostsApiController {
 	private final PostsService postsService;//생성자로 주입
 	//포스트매핑은 페이지 폼에서만 접근가능(보안)
 	@PostMapping("/api/posts/save")//저장:Create
-	public Long save(@RequestBody PostsDto requestDto) {
+	public Long save(@RequestBody PostsDto requestDto,@LoginUser SessionUser user) {
+		requestDto.setAuthor(user.getName());//해킹방지용 강제입력
 		return postsService.save(requestDto);
 	}
 	//겟매핑은 페이지 URL에서만 접근가능(비보안)
@@ -36,7 +39,8 @@ public class PostsApiController {
 	
 	//풋매핑은 페이지 폼에서만 접근가능(보안)
 	@PutMapping("/api/posts/{id}")//수정:Update
-	public Long update(@PathVariable Long id, @RequestBody PostsDto requestDto) {
+	public Long update(@PathVariable Long id, @RequestBody PostsDto requestDto,@LoginUser SessionUser user) {
+		requestDto.setAuthor(user.getName());//해킹방지용 강제입력
 		return postsService.update(id, requestDto);
 	}
 	@DeleteMapping("/api/posts/{id}")

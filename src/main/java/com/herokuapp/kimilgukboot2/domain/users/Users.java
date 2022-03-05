@@ -47,6 +47,6 @@ public class Users extends BaseTimeEntity {
 		return Users.this;
 	}
 	public String getRoleKey() {//나열형 이라서 일반 GET메소드로는 부족하다.
-		return this.role.getKey();//ADMIN, USER, ...반환
+		return this.role.getKey();//ROLE_ADMIN, ROLE_USER, ...반환
 	}
 }

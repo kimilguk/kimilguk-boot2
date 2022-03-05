@@ -127,7 +127,7 @@ public class IndexController {
 		return "kakaomap";//resource루트의 templates폴더에 kakaomap.mustache 파일과 연결
 	}
 	@GetMapping("/posts/update/{id}")
-	public String postsUpdate(@PathVariable Long id, Model model,@LoginUser SessionUser user) {
+	public String postsUpdate(HttpServletResponse response,@PathVariable Long id, Model model,@LoginUser SessionUser user) throws IOException {
 		if(user != null) {
 			model.addAttribute("sessionUserName", user.getName());
 			model.addAttribute("sessionRoleName", "ROLE_ADMIN".equals(user.getRole())?"admin":null);
@@ -138,6 +138,9 @@ public class IndexController {
 			//단일 첨부파일 처리는 이후 수업에서 작업(아래)
 			FileDto fileDto = fileService.getFile(dto.getFileId());
 			model.addAttribute("OrigFilename", fileDto.getOrigFilename());
+		}
+		if(!user.getName().equals(dto.getAuthor()) && !"ROLE_ADMIN".equals(user.getRole())) {
+			ScriptUtils.alertAndBackPage(response, "본인 글만 수정 가능합니다.!");
 		}
 		//멀티파일 조회처리
 		List<ManyFile> manyFileList = manyFileService.getManyFile(id);
