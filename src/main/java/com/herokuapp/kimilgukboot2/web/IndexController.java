@@ -167,7 +167,10 @@ public class IndexController {
 		return "posts/posts-read";
 	}
 	@GetMapping("/posts/save")//Url주소와 posts-save.mustache를 매핑시킨다.
-	public String postsSave() {
+	public String postsSave(Model model,@LoginUser SessionUser user) {
+		if(user != null) {
+			model.addAttribute("sessionUserName", user.getName());
+		}
 		return "posts/posts-save";
 	}
 	//@GetMapping("/posts")//전체게시물 Read
