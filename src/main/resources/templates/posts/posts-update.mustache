@@ -42,7 +42,7 @@
 	        <div class="form-group">
 	        	<label for="author">멀티 첨부 파일</label>
 	        	{{#manyFileList}}
-	        	<div class="file_id">
+	        	<div class="file_id"><!-- 줄바꿈 효과와 index.js 에서 file_id 클래스명으로 사용된다. -->
 	        	<a href="/api/many_file_download/{{id}}">{{origFilename}}</a>
                 <button type="button" class="btn btn-danger btn-delete-many-file">파일삭제</button>
                 <input type="hidden" name="file_id" id="file_id" value="{{id}}">
