@@ -187,12 +187,14 @@ public class IndexController {
 		if(user != null) {
 			model.addAttribute("sessionUserName", user.getName());
 			model.addAttribute("sessionRoleName", "ROLE_ADMIN".equals(user.getRole())?"admin":null);
-			//회원DB에 등록된 사용자인지 확인
-			if(simpleUsersService.findByName(user.getName()) == null) {
-				model.addAttribute("memberTrue", null);
-			}else {
+			//회원DB에 등록된 사용자인지 확인 또는 아래
+	        //user.getEmail();// 로 네이버로 로그인 시 발생되는 고유한 세션 값으로 비교해도 된다.
+			try {
+				SimpleUsersDto usersDto = simpleUsersService.findByName(user.getName());
 				//회원DB에 등록된 사용자만 memberTrue에 true 값을 보낸다.
-				model.addAttribute("memberTrue", true);
+				model.addAttribute("memberTrue", usersDto);
+			}catch (Exception e) {
+				model.addAttribute("memberTrue", null);
 			}
 		}
 		Page<Posts> postsList = postsService.postsList(pageable);
