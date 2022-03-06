@@ -23,9 +23,11 @@ $(document).ready(function() {
                     회원관리
                 </a>
                 {{/sessionRoleName}}
+                {{^sessionRoleName}}{{#memberTrue}}
                 <a href="/mypage/update/{{sessionUserName}}" class="btn btn-secondary active" role="button">
                     마이페이지
                 </a>
+                {{/memberTrue}}{{/sessionRoleName}}
                 {{/sessionUserName}}
                 {{^sessionUserName}}
                 <!-- 스프링 시큐리티에서 기본적으로 제공하는 로그인 URL이다. 매칭되는 컨트롤러 코드를 생성할 필요가 없다. -->

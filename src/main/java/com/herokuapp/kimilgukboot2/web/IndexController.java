@@ -53,7 +53,11 @@ public class IndexController {
 	private final ManyFileService manyFileService;//생성자로 주입
 	
 	@GetMapping("/mypage/update/{username}")//회원상세 디자인보기
-	public String mypageUpdate(@PathVariable String username,Model model,@LoginUser SessionUser user) {
+	public String mypageUpdate(HttpServletResponse response,@PathVariable String username,Model model,@LoginUser SessionUser user) throws IOException {
+		if(!username.equals(user.getName())) {
+			ScriptUtils.alertAndBackPage(response, "본인 이이디만 수정 가능합니다.!");
+			return null;//현재 메소드를 빠져 나간다==종료한다.
+		}
 		model.addAttribute("simple_user", simpleUsersService.findByName(username));
 		return "mypage/update";
 	}
@@ -141,6 +145,7 @@ public class IndexController {
 		}
 		if(!user.getName().equals(dto.getAuthor()) && !"ROLE_ADMIN".equals(user.getRole())) {
 			ScriptUtils.alertAndBackPage(response, "본인 글만 수정 가능합니다.!");
+			return null;//현재 메소드를 빠져 나간다==종료한다.
 		}
 		//멀티파일 조회처리
 		List<ManyFile> manyFileList = manyFileService.getManyFile(id);
@@ -182,6 +187,13 @@ public class IndexController {
 		if(user != null) {
 			model.addAttribute("sessionUserName", user.getName());
 			model.addAttribute("sessionRoleName", "ROLE_ADMIN".equals(user.getRole())?"admin":null);
+			//회원DB에 등록된 사용자인지 확인
+			if(simpleUsersService.findByName(user.getName()) == null) {
+				model.addAttribute("memberTrue", null);
+			}else {
+				//회원DB에 등록된 사용자만 memberTrue에 true 값을 보낸다.
+				model.addAttribute("memberTrue", true);
+			}
 		}
 		Page<Posts> postsList = postsService.postsList(pageable);
 		model.addAttribute("postsList", postsList);//게시글목록 5개
