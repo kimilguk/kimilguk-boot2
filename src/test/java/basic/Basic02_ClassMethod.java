@@ -1,6 +1,6 @@
 package basic;
 /**
- * 클래스와 객체의 관계 및 오버라이드 메서드 사용에 대해서 학습(객체의 다형성)
+ * 클래스와 객체의 관계 및 상속에 대해서 학습(객체의 다형성)
  * @author kimilguk
  * Basic02_ClassMethod.java
  */
