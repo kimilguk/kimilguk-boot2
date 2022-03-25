@@ -21,6 +21,7 @@
 ![ex_screenshot](./README/git06.jpg)
 
 #### 자바기본이 부족한 분들을 위한 학습자료 추가
+- [자바기본학습자료 강의용소스 링크](https://github.com/kimilguk/kimilguk-boot2/tree/boot14_03/src/test/java/basic)
 01) 자바기초의 시작으로 헬로월드를 출력하는 프로그램 생성한다.
  * 데이터 저장용 변수의 종류를 학습한다. 
  * Basic01_HelloWorld.java
