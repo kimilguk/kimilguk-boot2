@@ -1,11 +1,12 @@
 package basic;
 /**
- * 싱글톤 이라는 앱 실행시 static처럼 1회만 생성되는 객체 학습(제어구문중 if비교문사용)
+ * 싱글톤 이라는 static 속성처럼 앱 실행 시 객체로 생성되고, 1회만  객체로 만들 수 있는 클래스
+ * (제어구문중 if비교문사용)
  * @author kimilguk
  * Basic06_Singleton.java
  */
 class Singleton{//앱 실행시 이 클래스는 내부에 new 키워드로 객체가 이미 생성되게 함. 
-	private static Singleton instance = new Singleton(); // 정적필드 / 인스턴스 생성 
+	private static Singleton instance = new Singleton(); //외부 클래스에서 new로 객체 생성 불가  
 	private Singleton(){} // private 생성자
 	public static Singleton getInstance(){ // getInstance 메서드 정의
 		return instance; // instance 객체 리턴

@@ -28,7 +28,7 @@ public class Basic05_Exception {
 				System.out.println("finally는 try~catch 결과와 상관없이 항상 실행");
 			}
 			
-		}
+		}//for문 종료
 
 	}
 

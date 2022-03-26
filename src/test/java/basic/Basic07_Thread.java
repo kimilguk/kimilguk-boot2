@@ -10,7 +10,7 @@ class MyThread extends Thread {
 		super(szName);
 	}
 	public void run() {//MyThread스레드를 start()호출해야지만, 자동실행되는 메서드 
-		for(int cnt=0;cnt<30;cnt++) {
+		for(int cnt=0;cnt<50;cnt++) {
 			System.out.print(this.getName() + " ");
 		}
 	}

@@ -5,7 +5,7 @@ package basic;
  * Basic02_ClassMethod.java
  */
 //오브젝트생성과 new키워드사용 연습(아래)
-class Circle {
+class Circle {//클래스 생성 주의, 클래스명 시작문자는 반드시 대문자만 사용한다
 	private int r;//멤버변수 반지름 이클래스에서 전연변수
 	public Circle(int a) {//메서드중 클래스명과 같은 이름의 메서드를 생성자 라고 한다.
 		r = a;//생성자매서드 a인자=매개변수=파라미터 값은 new키워드로 오브젝트 만들어질때 실행

@@ -9,7 +9,7 @@ public class Basic08_Runnable implements Runnable {
 	@Override
 	public void run() {
 		// 러너블 인터페이스 구현클래스RunnableApp을 start()하면 자동 실행
-		System.out.println("러너블시작시 자동실행됩니다.!");
+		System.out.println("러너블은 앱 시작시 자동 실행됩니다.!");
 	}
 
 	public static void main(String[] args) {

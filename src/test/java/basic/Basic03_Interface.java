@@ -14,7 +14,7 @@ interface CalcMulDiv {//곱하기,나누기 명세서
 	void mul(double dx, double dy);
 	void div(double dx, double dy);
 }
-
+//임플리먼트:구현하다는 의미 뒤에 있는 인터페이스를 상속하여 명세만 있는 메서드를 재 사용할 수 있다.
 class AllCalc implements CalcAddSub, CalcMulDiv {
 
 	@Override
@@ -39,7 +39,7 @@ class AllCalc implements CalcAddSub, CalcMulDiv {
 	public void sub(double dx, double dy) {
 		// 구현내용
 		System.out.println("빼기 결과는 " + (dx-dy) );
-	}//임플리먼트:구현하다 의미 뒤에 있는 클래스명세표기준 구현한다.
+	}
 	
 }
 public class Basic03_Interface {
