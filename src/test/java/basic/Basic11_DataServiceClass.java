@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 데이터클래스자료형과 서비스클래스에 대해서 학습(메소드의 다형성)
+ * 데이터자료형 클래스와 서비스클래스에 대해서 학습(메소드의 다형성)
  * @author kimilguk
  * Basic11_DataServiceClass.java
  */
-class MemberVO {
+class MemberVO {//VO는 ValueObject 의 약자로 데이터값만 모아놓은 의미로 개발자가 사용한다.
 	//멤버변수 만들기(아래)
 	private String name;
 	private int age;
@@ -84,7 +84,7 @@ public class Basic11_DataServiceClass {
 	memberList.add(memberVO);
 	memberList.add(memberVO2);
 	memberList.add(memberVO3);
-	//전에 사용했던 출력보다는 개선된 방식으로 출력(아래) MemberService 서비스전용 클래스만들어서 처리.
+
 	MemberService memberService = new MemberService();//자바 오브젝트객체 생성하는 방법\
 	//아래처럼 메소드명이 동일하고 로드된 파라미터가 틀린 경우를 메소드 오버로드라고 한다.(메소드의 다형성)
 	memberService.printMember(memberArray);//서비스클래스의 메서드호출

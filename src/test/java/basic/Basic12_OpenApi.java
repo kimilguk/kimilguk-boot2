@@ -14,7 +14,8 @@ import org.json.JSONObject;
  * Basic12_OpenApi.java
  */
 public class Basic12_OpenApi {
-	//외부연계 역할 메서드(아래)
+	//Rest(Representational State Transfer:데이터를 재가공해서 통신)
+	//API(Applicataion Program Interface) 외부연계 역할 메서드(아래)
 	public static void serviceApi() throws IOException {
 		BufferedReader bufferedReader = null;//전송받은 데이터를 임시 저장하는 공간.자동차범퍼.
 		String urlStr = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20220101";

@@ -47,7 +47,7 @@
  * Basic09_Lambda.java
 10) 입력,출력 스트림 클래스를 사용하여 파일 입출력을 구현한다.
  * Basic10_FileInputOutput.java
-11) 데이터클래스자료형과 서비스클래스에 대해서 학습한다.(메서드의 다형성)
+11) 데이터자료형 클래스와 서비스클래스에 대해서 학습한다.(메서드의 다형성)
  * Basic11_DataServiceClass.java
 12) 오픈API 서비스에서 제공하는 JSON 목록을 출력하는 기능을 구현한다.
  * Basic12_OpenApi.java
