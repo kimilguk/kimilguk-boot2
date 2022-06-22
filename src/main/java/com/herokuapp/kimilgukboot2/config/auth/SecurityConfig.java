@@ -50,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.csrf().disable()//Cross-site Request Forgery 취약점 사용안함
 		.headers().frameOptions().disable().and()//h2-console 에서 iframe 하기 때문에
 		.authorizeHttpRequests()//http 요청으로 권한설정을 시작
+		.antMatchers("/api/file_download/**").permitAll()//회원로그인 하지 않은 상태로 다운로드 하기위해
+		.antMatchers("/api/many_file_download/**").permitAll()//회원로그인 하지 않은 상태로 다운로드 하기위해
 		.antMatchers("/mypage/**").hasRole(Role.USER.name())
 		.antMatchers("/simple_users/**").hasRole(Role.ADMIN.name())
 		.antMatchers("/posts/read/**").permitAll()
