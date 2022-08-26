@@ -3,7 +3,8 @@
 - [교수의 모든 주차_교시별 강의용소스 링크](https://github.com/kimilguk/kimilguk-boot2/branches/all)
 
 #### 13주차 시작 전 아래항목을 2가지를 수정 후 실습을 진행 하시면 됩니다.
--1) src/main/resources/application.properties 파일상단 코드수정
+- 단, 모든 13-14주차 테스트URL은 http://127.0.0.1:8080 로 테스트한다.
+-1) src/main/resources/application.properties 파일상단 H2DB사용으로 코드수정
 
 ```
 중략...
@@ -13,7 +14,7 @@ spring.profiles.include=db-h2,oauth-local
 중략...
 ```
 
--2) src/main/resources/import.sql 파일 추가
+-2) src/main/resources/import.sql 파일 추가. 서버를 재시작 할 때마다 자동으로 초기화 된다.
 
 ```
 DELETE FROM SIMPLE_USERS
