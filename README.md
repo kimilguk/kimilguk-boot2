@@ -89,10 +89,13 @@ source ~/.profile
 - ![그래들 빌드 실행명령 추가](./README/goorm14.jpg)
 - 결과 크롬 화면(아래)
 - ![그래들 빌드 실행명령 추가](./README/goorm15.jpg)
-- 카카오개발자센터에서도 위 도메인을 추가해서 지도를 사용할 수 있게 해준다.
+- 카카오개발자센터에서도 위 https://kimilguk-boot-czziw.run.goorm.io/ 도메인을 추가해서 지도를 사용할 수 있게 해준다.
 - ![카카오개발자센터 도메인 추가](./README/goorm16.jpg)
-- 네이버개발자센터에서도 위 도메인을 추가해서 네아로를 사용할 수 있게 해준다.
+- 네이버개발자센터에서도 위 https://kimilguk-boot-czziw.run.goorm.io/ 도메인을 추가해서 네아로를 사용할 수 있게 해준다.
 - ![네이버개발자센터 도메인 추가](./README/goorm17.jpg)
+- 위 콜백URL을 확인하는 방법.(아래)
+- 아래 크롬 console에서 new URL(document.referrer).searchParams.get("redirect_uri")
+- ![네이버개발자센터 도메인 추가](./README/goorm19.jpg)
 - 구름ide 터미널에서 ps -ef | grep java 로 자바로 실행중인 프로세스를 확인 후 삭제한다. 컨테이너 나가기 후 다시 들어온다.
 - kill 프로세스번호 로 삭제 후 확인을 위해 build/libs폴더의 jar를 지우고 아래 노란색 버튼으로 재실행 한다.(아래)
 - ![네이버개발자센터 도메인 추가](./README/goorm18.jpg)
