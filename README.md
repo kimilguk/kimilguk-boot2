@@ -1,7 +1,7 @@
 ### 스프링부트와 클라우드활용 강의용 깃 소스 입니다.
 #### 무료 헤로쿠클라우드 사용중지에 따른 구름ide 클라우드로 배포 가능한 작업소스 입니다.
 - [교수의 모든 주차_교시별 강의용소스 링크](https://github.com/kimilguk/kimilguk-boot2/branches/all)
-
+- 구름 클라우드를 사용한 결과 URL: https://kimilguk-boot-czziw.run.goorm.io/
 #### 구름ide 클라우드에 배포 전 아래항목을 3가지를 수정 후 진행 하시면 됩니다.
 -1) src/main/resources/application.properties 파일상단 코드수정
 
