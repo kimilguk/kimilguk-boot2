@@ -6,6 +6,10 @@
 ```
 그동안 잘 사용하였고, 상당히 편리하게 free dyno 호스팅 서비스와 free postgreSQL 데이터베이스를 사용할 수 있는 것이 장점 이었습니다. 9월에 학생용 지원책을 발표한다고 하는데, free 서비스가 포함되기를 바라고 있습니다.
 그래서, 이번에 기존 헤로쿠용 스프링부트 프로젝트를 구름ide 클라우드용으로 마이그레이션 해 보았습니다.
+기존 헤로쿠용 소스: https://github.com/kimilguk/kimilguk-boot2/tree/boot14_03
+기존 헤로쿠용 배포URL(11월 이후 삭제예정): https://kimilguk-boot2.herokuapp.com/
+신규 구름ide용 소스: https://github.com/kimilguk/kimilguk-boot2/tree/goormcloud
+신규 구름ide용 배포URL: https://kimilguk-boot-czziw.run.goorm.io/
 ```
 
 #### 구름ide 클라우드에 배포 전 아래항목을 3가지를 수정 후 진행 하시면 됩니다.
