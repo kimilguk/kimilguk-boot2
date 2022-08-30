@@ -41,7 +41,7 @@ tasks.named('test') {
 test {
     exclude '**/*'
 }
-//단, 구름ide에서는 KimilgukBoot2Application-plain.jar 파일까지 자동으로 생성되기 때문에 생성되지 않도록 처리한다(아래)
+//단, 구름ide에서는 Xxx-plain.jar 파일까지 자동으로 생성되기 때문에 생성되지 않도록 처리한다(아래)
 jar {
 	enabled = false
 }
