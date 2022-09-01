@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.herokuapp'
 version = '0.0.1-SNAPSHOT'//kimilguk-boot2-0.0.1-SNAPSHOT.jar실행파일명 지정됨
-sourceCompatibility = '11'//지정한 자바버전
+sourceCompatibility = '8'//지정한 자바버전
 
 configurations {
 	compileOnly {
@@ -36,4 +36,12 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()//Java단위테스트인 Junit을 실행가능하게 지정(기본값)
+}
+//단, 구름ide에서는 배포시 테스트는 제외하도록 지정(아래)
+test {
+    exclude '**/*'
+}
+//단, 구름ide에서는 Xxx-plain.jar 파일까지 자동으로 생성되기 때문에 생성되지 않도록 처리한다(아래)
+jar {
+	enabled = false
 }
