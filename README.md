@@ -19,11 +19,12 @@
 중략...
 #spring.profiles.include=db-postgres,oauth-heroku
 spring.profiles.include=db-h2,oauth-local
-#구름ide 클라우드용 추가(아래) https://kimilguk.tistory.com/806
-spring.jpa.open-in-view=false
+#구름ide 클라우드용 추가(아래) 필요없음. 원상복구,빌드 속도를 향상시키는 역할임
+#spring.jpa.open-in-view=false
 중락...
-#로깅레벨을 축소하면서 DB실행구문(SQL)이 나오지 않아서 추가-단, 구름ide 클라우드에서는 false로 한다(아래)
-spring.jpa.show_sql=false
+#로깅레벨을 축소하면서 DB실행구문(SQL)이 나오지 않아서 추가
+#단, 구름ide 클라우드에서는 false로 한다(아래) 필요없음. 원상복구
+spring.jpa.show_sql=true
 중략...
 ```
 
