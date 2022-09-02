@@ -2,6 +2,7 @@
 #### 헤로쿠클라우드 무료정책 사용중지에 따른 구름ide 클라우드로 배포 가능한 작업소스 입니다.
 - [교수의 모든 주차_교시별 강의용소스 링크](https://github.com/kimilguk/kimilguk-boot2/branches/all)
 - 구름 클라우드를 사용한 결과 URL: https://kimilguk-boot-czziw.run.goorm.io/
+- 단, 현재 goormcloud 브랜치소스는 h2 DB를 활성화 시켜놓아서 간편하게 배포 실행할 수 있게 제작한 것입니다.
 
 ```
 그동안 잘 사용하였고, 상당히 편리하게 free dyno 호스팅 서비스와 free postgreSQL 데이터베이스를 사용할 수 있는 것이 장점 이었습니다. 9월에 학생용 지원책을 발표한다고 하는데, free 서비스가 포함되기를 바라고 있습니다.
