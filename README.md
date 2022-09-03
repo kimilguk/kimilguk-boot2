@@ -67,8 +67,8 @@ jar {
 - ![스프링부트 템플릿을 선택](./README/goorm5.jpg)
 - 템플릿 중 그래들 빌더 프로젝트를 선택한다.(아래)
 - ![그래들 빌더 프로젝트를 선택](./README/goorm6.jpg)
-- 강의에서는 H2와 postgreSQL DB 2가지를 사용하지만, MySQL과 mysql-ctl을 선택 후 생성하기 버튼 클릭 한다.(아래)
-- ![MySQL과 mysql-ctl명령을 추가](./README/goorm7.jpg)
+- 강의에서는 postgreSQL DB를 사용한다, MySQL과 mysql-ctl은 선택하지 않고 하단 생성하기 버튼 클릭 한다.(아래)
+- ![생성하기 버튼 클릭](./README/goorm7.jpg)
 - 아래 엡 서비스를 항상켜두기 버튼을 활성화하기 위해 정지 시킨다.
 - ![항상켜두기 활서화](./README/goorm8.jpg)
 - 아래 엡 서비스를 항상켜두기 버튼을 활성화 시킨 후 실행 버튼으로 컨테이너에 들어간다.
