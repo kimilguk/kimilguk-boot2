@@ -37,7 +37,7 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()//Java단위테스트인 Junit을 실행가능하게 지정(기본값)
 }
-//단, 구름ide에서는 배포시 테스트는 제외하도록 지정(아래)
+//단, 구름ide에서는 배포시 테스트는 제외하도록 지정-아래
 test {
     exclude '**/*'
 }
