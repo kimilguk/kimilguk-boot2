@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.herokuapp'
 version = '0.0.1-SNAPSHOT'//kimilguk-boot2-0.0.1-SNAPSHOT.jar실행파일명 지정됨
-sourceCompatibility = '8'//지정한 자바버전. 단, 구름 클라우드에서는 11을 8로 변경한다.
+sourceCompatibility = '8' //지정한 자바버전. 단, 구름 클라우드에서는 11을 8로 변경한다.
 
 configurations {
 	compileOnly {
