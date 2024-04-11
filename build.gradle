@@ -37,3 +37,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()//Java단위테스트인 Junit을 실행가능하게 지정(기본값)
 }
+//소스가 수정되면, koyeb플랫폼에서 CI(Continuous Integration)/CD(Autodeploy) 기능으로 자동 배포된다.
