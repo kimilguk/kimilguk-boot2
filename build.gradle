@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.herokuapp'
 version = '0.0.1-SNAPSHOT'//kimilguk-boot2-0.0.1-SNAPSHOT.jar실행파일명 지정됨
-sourceCompatibility = '8'//지정한 자바버전
+sourceCompatibility = '11'//지정한 자바버전 단, 구름 클라우드에서는 11을 8로 변경한다.
 
 configurations {
 	compileOnly {
@@ -41,7 +41,7 @@ tasks.named('test') {
 test {
     exclude '**/*'
 }
-//단, 구름ide에서는 Xxx-plain.jar 파일까지 자동으로 생성되기 때문에 생성되지 않도록 처리한다(아래)
+//단, 구름ide에서는 jar 실행파일까지 자동으로 생성되기 때문에 생성되지 않도록 처리한다(아래 false)
 jar {
-	enabled = false
+	enabled = true
 }
