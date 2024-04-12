@@ -41,7 +41,7 @@ tasks.named('test') {
 test {
     exclude '**/*'
 }
-//단, 구름ide에서는 jar 실행파일까지 자동으로 생성되기 때문에 생성되지 않도록 처리한다(아래 false)
+//단, 구름ide에서는 jar 실행파일까지 자동으로 생성되기 때문에 생성되지 않도록 처리한다(아래 구름ide일 경우 false)
 jar {
 	enabled = true
 }
