@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.3'//지정한 스프리부트버전
+	id 'org.springframework.boot' version '2.6.3'//지정한 스프링부트버전
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'//지정한 개발언어
 }
