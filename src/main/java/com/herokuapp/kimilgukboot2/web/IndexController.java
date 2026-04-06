@@ -95,11 +95,10 @@ public class IndexController {
 	}
 	@GetMapping("/kakaomap")
 	public String kakaoMap(@RequestParam(value="keyword", defaultValue="천안시")String keyword,Model model) throws IOException {
-		//공공데이터포털에서 전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
-		StringBuilder urlBuilder = new StringBuilder("http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=PLJPmKeBFGOkoxgAoLJgT962Uh0QPWijxPNQ%2Bl%2B4o24r9R%2BqbclT0Fc9xSamDrGiMYAF4CrpJLaDOsKZ%2FDoN%2Bw%3D%3D"); /*Service Key*/
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*페이지 크기(기본10)*/
-        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*시작 페이지(기본1)*/
+		//bigdata.kepco로 수정, 아래 3줄 공공데이터포털에서 전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
+		StringBuilder urlBuilder = new StringBuilder("https://bigdata.kepco.co.kr/openapi/v1/EVchargeManage.do"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("apiKey","UTF-8") + "=u5fd16awu91me8PmKu0fwtk6sdCNVMje19iL6yrS"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("returnType","UTF-8") + "=xml"); /*시작 페이지(기본1)*/
         urlBuilder.append("&" + URLEncoder.encode("addr","UTF-8") + "=" + URLEncoder.encode(keyword, "UTF-8")); /*충전소주소*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -120,16 +119,15 @@ public class IndexController {
         rd.close();
         conn.disconnect();
         //logger.info("xml결과: \n" + sb.toString());//xml 데이터를 출력한다.
-        JSONObject jsonObject = XML.toJSONObject(sb.toString());
+        //bigdata.kepco로 수정, 아래 2줄 ?와 > 사이의 공백을 제거
+        String fixedXml = sb.toString().replaceAll("\\?\\s*>", "?>");
+        JSONObject jsonObject = XML.toJSONObject(fixedXml);
+        //System.out.println(fixedXml);//xml to json 전체 데이터
         //System.out.println(jsonObject.toString());//xml to json 전체 데이터
-        /* 의령군 전기차 충전소 일때
-        JSONObject rfcOpenApi = (JSONObject) (jsonObject.get("rfcOpenApi"));
-        JSONObject header = (JSONObject) rfcOpenApi.get("header");
-        JSONObject body = (JSONObject) rfcOpenApi.get("body");
-        */
-        JSONObject response = (JSONObject) (jsonObject.get("response"));
-        JSONObject header = (JSONObject) response.get("header");
-        JSONObject body = (JSONObject) response.get("body");
+        /* bigdata.kepco로 수정, 아래 3줄 */
+        JSONObject response = (JSONObject) (jsonObject.get("Response"));
+        JSONObject header = (JSONObject) response.get("cmmMsgHeader");
+        JSONObject body = (JSONObject) response.get("List");
         //System.out.println(header.toString());//헤더 정보 확인
         System.out.println(body.toString());//실제 데이터 정보 확인
 		model.addAttribute("response", body);
