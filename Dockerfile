@@ -1,5 +1,5 @@
 # Build stage
-FROM 7.3.3-jdk11-alpine AS builder
+FROM gradle:7.3.3-jdk11-alpine AS builder
 COPY --chown=gradle:gradle . /home/gradle/project
 WORKDIR /home/gradle/project
 RUN gradle build --no-daemon
