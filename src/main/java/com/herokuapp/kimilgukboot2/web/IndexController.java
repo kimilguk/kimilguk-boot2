@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import com.herokuapp.kimilgukboot2.config.auth.LoginUser;
 import com.herokuapp.kimilgukboot2.config.auth.dto.SessionUser;
@@ -30,9 +32,24 @@ public class IndexController {
 	private final FileService fileService;//생성자로 주입
 	
 	@GetMapping("/kakaomap")
-	public String kakaoMap(Model model) {
-		//공공데이터포털에서 한국전력공사_전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
-		model.addAttribute("response", null);
+	public String kakaoMap(@RequestParam(value="keyword", defaultValue="천안시")String keyword, Model model) {
+		//공공데이터포털에서 전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정(다음시간에 현재는 null)
+		RestTemplate restTemplate = new RestTemplate();// RestTemplate 임포트 후 객체를 생성한다.
+		// API URL 및 파라미터 분리
+		String baseUrl = "https://bigdata.kepco.co.kr/openapi/v1/EVchargeManage.do";
+		String addr = keyword; // 앞으로 검색어를 addr 파라미터로 사용할 예정
+		String apiKey = "u5fd16awu91me8PmKu0fwtk6sdCNVMje19iL6yrS";
+		String returnType = "json";
+		String apiUrl = String.format("%s?addr=%s&apiKey=%s&returnType=%s", baseUrl, addr, apiKey, returnType); 
+		try {
+			// 외부 API 호출 및 JSON 데이터 가져오기
+			String response = restTemplate.getForObject(apiUrl, String.class);
+			System.out.println("JSON Response: " + response); // JSON 결과를 콘솔에 출력
+			model.addAttribute("response", response); // JSON 데이터를 모델에 추가
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("response", "Error fetching data");
+		}
 		return "kakaomap";//resource루트의 templates폴더에 kakaomap.mustache 파일과 연결
 	}
 	@GetMapping("/posts/update/{id}")
