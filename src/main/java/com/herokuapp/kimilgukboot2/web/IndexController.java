@@ -50,6 +50,7 @@ public class IndexController {
 			e.printStackTrace();
 			model.addAttribute("response", "Error fetching data");
 		}
+		model.addAttribute("keyword", keyword); // 검색어를 모델에 담아서 머스태치에 보내준다.
 		return "kakaomap";//resource루트의 templates폴더에 kakaomap.mustache 파일과 연결
 	}
 	@GetMapping("/posts/update/{id}")
