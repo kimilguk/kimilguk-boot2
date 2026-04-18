@@ -1,17 +1,10 @@
 package com.herokuapp.kimilgukboot2.web;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
-import org.json.XML;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -24,9 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.herokuapp.kimilgukboot2.config.auth.LoginUser;
 import com.herokuapp.kimilgukboot2.config.auth.dto.SessionUser;
 import com.herokuapp.kimilgukboot2.domain.posts.ManyFile;
@@ -94,46 +86,25 @@ public class IndexController {
 		return null;//"redirect:/simple_users/list";//저장 후 절대경로로 페이지이동
 	}
 	@GetMapping("/kakaomap")
-	public String kakaoMap(@RequestParam(value="keyword", defaultValue="천안시")String keyword,Model model) throws IOException {
-		//공공데이터포털에서 전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정
-		StringBuilder urlBuilder = new StringBuilder("http://openapi.kepco.co.kr/service/EvInfoServiceV2/getEvSearchList"); /*URL*/
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=PLJPmKeBFGOkoxgAoLJgT962Uh0QPWijxPNQ%2Bl%2B4o24r9R%2BqbclT0Fc9xSamDrGiMYAF4CrpJLaDOsKZ%2FDoN%2Bw%3D%3D"); /*Service Key*/
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*페이지 크기(기본10)*/
-        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*시작 페이지(기본1)*/
-        urlBuilder.append("&" + URLEncoder.encode("addr","UTF-8") + "=" + URLEncoder.encode(keyword, "UTF-8")); /*충전소주소*/
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Content-type", "application/json");
-        System.out.println("Response code: " + conn.getResponseCode());
-        BufferedReader rd;
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-        //logger.info("xml결과: \n" + sb.toString());//xml 데이터를 출력한다.
-        JSONObject jsonObject = XML.toJSONObject(sb.toString());
-        //System.out.println(jsonObject.toString());//xml to json 전체 데이터
-        /* 의령군 전기차 충전소 일때
-        JSONObject rfcOpenApi = (JSONObject) (jsonObject.get("rfcOpenApi"));
-        JSONObject header = (JSONObject) rfcOpenApi.get("header");
-        JSONObject body = (JSONObject) rfcOpenApi.get("body");
-        */
-        JSONObject response = (JSONObject) (jsonObject.get("response"));
-        JSONObject header = (JSONObject) response.get("header");
-        JSONObject body = (JSONObject) response.get("body");
-        //System.out.println(header.toString());//헤더 정보 확인
-        System.out.println(body.toString());//실제 데이터 정보 확인
-		model.addAttribute("response", body);
-		model.addAttribute("keyword", keyword);
+	public String kakaoMap(@RequestParam(value="keyword", defaultValue="천안시")String keyword, Model model) {
+		//공공데이터포털에서 전기차 충전소 데이터를 받아서 model객체에 담는 코딩예정(다음시간에 현재는 null)
+		RestTemplate restTemplate = new RestTemplate();// RestTemplate 임포트 후 객체를 생성한다.
+		// API URL 및 파라미터 분리
+		String baseUrl = "https://bigdata.kepco.co.kr/openapi/v1/EVchargeManage.do";
+		String addr = keyword; // 앞으로 검색어를 addr 파라미터로 사용할 예정
+		String apiKey = "u5fd16awu91me8PmKu0fwtk6sdCNVMje19iL6yrS";
+		String returnType = "json";
+		String apiUrl = String.format("%s?addr=%s&apiKey=%s&returnType=%s", baseUrl, addr, apiKey, returnType); 
+		try {
+			// 외부 API 호출 및 JSON 데이터 가져오기
+			String response = restTemplate.getForObject(apiUrl, String.class);
+			System.out.println("JSON Response: " + response); // JSON 결과를 콘솔에 출력
+			model.addAttribute("response", response); // JSON 데이터를 모델에 추가
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("response", "Error fetching data");
+		}
+		model.addAttribute("keyword", keyword); // 검색어를 모델에 담아서 머스태치에 보내준다.
 		return "kakaomap";//resource루트의 templates폴더에 kakaomap.mustache 파일과 연결
 	}
 	@GetMapping("/posts/update/{id}")
