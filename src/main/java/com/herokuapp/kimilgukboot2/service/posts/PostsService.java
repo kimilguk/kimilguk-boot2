@@ -35,6 +35,10 @@ public class PostsService {
 		Page<Posts> postsList = postsRepository.findAll(pageable);
 		return postsList;
 	}
+	@Transactional//읽기:전체게시물 Read+검색기능 추가
+	public Page<Posts> postsList(String keyword,Pageable pageable) {
+		return postsRepository.findByTitleContaining(keyword,pageable);
+	}
 	@Transactional//수정:Update는 엔티티의 값만수정하면 레포지토리 없이 DB값도 연동된다
 	public Long update(Long id, PostsDto requestDto) {
 		Posts posts = postsRepository.findById(id).orElseThrow(()->new IllegalArgumentException(id + " 번째 게시글이 없습니다."));//에러발생시 콘솔창에 에러 표시 후 메소드 종료됨. 자바8부터 람다=애러우 메소드 사용가능

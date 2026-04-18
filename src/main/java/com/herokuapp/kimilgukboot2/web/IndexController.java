@@ -160,7 +160,7 @@ public class IndexController {
 	}
 	//@GetMapping("/posts")//전체게시물 Read
 	@GetMapping("/")//접근 Api Url을 도메인 루트로 변경한다.
-	public String postList(@PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model,@LoginUser SessionUser user) {
+	public String postList(@RequestParam(value="keyword", defaultValue="")String keyword, @PageableDefault(size=5,sort="id",direction=Sort.Direction.DESC) Pageable pageable, Model model,@LoginUser SessionUser user) {
 		if(user != null) {
 			model.addAttribute("sessionUserName", user.getName());
 			model.addAttribute("sessionRoleName", "ROLE_ADMIN".equals(user.getRole())?"admin":null);
@@ -174,7 +174,7 @@ public class IndexController {
 				model.addAttribute("memberTrue", null);
 			}
 		}
-		Page<Posts> postsList = postsService.postsList(pageable);
+		Page<Posts> postsList = postsService.postsList(keyword,pageable);//검색기능 추가
 		model.addAttribute("postsList", postsList);//게시글목록 5개
 		model.addAttribute("currPage", postsList.getPageable().getPageNumber());//현재페이지번호
 		model.addAttribute("pageIndex", postsList.getTotalPages());//전체페이지개수
